@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Signoff Coffee - About</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      background-color: #000;
+      color: #fff;
+      scroll-behavior: smooth;
+    }
+
+    .hero-header {
+      background: url('homepage/kedai.jpg') center center/cover no-repeat;
+      height: 60vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-header .overlay {
+      position: absolute;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.6);
+    }
+
+    .hero-header h1 {
+      position: relative;
+      color: white;
+      font-size: 4rem;
+      font-weight: bold;
+      z-index: 2;
+      text-align: center;
+      letter-spacing: 2px;
+    }
+
+    .navbar {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 2rem;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      border: 2px solid #ffffff;
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      color: #fff;
+      font-weight: bold;
+      font-size: 1.2rem;
+      text-transform: uppercase;
+      text-align: center;
+      line-height: 1.2;
+      width: 110px;
+      white-space: nowrap;
+    }
+
+    .logo span {
+      display: block;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+      z-index: 99;
+      flex-wrap: wrap;
+    }
+
+    .nav-links li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links li a:hover {
+      color: #ffcc80;
+    }
+
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: rgba(0, 0, 0, 0.95);
+      min-width: 200px;
+      padding-left: 0;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+      z-index: 99;
+      list-style: none;
+    }
+
+    .dropdown-menu li {
+      width: 100%;
+    }
+
+    .dropdown-menu li a {
+      display: block;
+      padding: 0.8rem 1.2rem;
+      color: #fff;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .dropdown-menu li a:hover {
+      background-color: #333;
+      color: #ffcc80;
+    }
+
+    .dropdown:hover .dropdown-menu {
+      display: block;
+    }
+
+    .footer-divider {
+      height: 2px;
+      width: 100%;
+      background: white;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+      margin-top: 20px;
+    }
+
+    footer {
+      background-color: #000;
+      color: #fff;
+      padding: 30px 15px;
+      text-align: center;
+      user-select: none;
+    }
+
+    .footer-links {
+      margin: 8px 0;
+    }
+
+    .footer-links a {
+      color: #ccc;
+      margin: 0 10px;
+      font-size: 0.9rem;
+      text-decoration: none;
+    }
+
+    .footer-links a:hover {
+      text-decoration: underline;
+    }
+
+    .social-icons {
+      margin: 10px 0;
+    }
+
+    .social-icons a {
+      color: white;
+      font-size: 1.5rem;
+      margin: 0 12px;
+      transition: 0.3s;
+    }
+
+    .social-icons a:hover {
+      color: #ffcc80;
+    }
+
+    footer p {
+      margin-top: 10px;
+      font-size: 0.9rem;
+      color: #cccccc;
+    }
+
+    .video-section {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      padding: 40px 20px;
+      justify-items: center;
+    }
+
+    .video-card-wrapper {
+      width: 100%;
+      max-width: 300px;
+      background-color: #111;
+      padding: 10px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+      transition: transform 0.3s ease, border 0.3s ease;
+      border: 2px solid transparent;
+    }
+
+    .video-card-wrapper:hover,
+    .video-card-wrapper:focus-within {
+      transform: scale(1.03);
+      border: 2px solid #ffcc80;
+    }
+
+    .video-card {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 9 / 16;
+      overflow: hidden;
+      border-radius: 8px;
+      background-color: #000;
+      cursor: pointer;
+    }
+
+    .caption {
+      margin-top: 10px;
+      font-size: 1rem;
+      color: #ddd;
+      text-align: center;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 200;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.8);
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-content {
+      position: relative;
+      background-color: #000;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 360px;
+      aspect-ratio: 9 / 16;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.1);
+    }
+
+    #modalVideo {
+      width: 100%;
+      height: 100%;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 14px;
+      color: #fff;
+      font-size: 2rem;
+      cursor: pointer;
+      z-index: 999;
+    }
+
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: flex;
+      }
+
+      .nav-links {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.95);
+        padding: 2rem 1rem;
+        display: none;
+        gap: 1.2rem;
+        border-top: 1px solid #333;
+        z-index: 99;
+      }
+
+      .nav-links.show {
+        display: flex;
+      }
+
+      .hero-header h1 {
+        font-size: 2.2rem;
+      }
+
+      .video-section {
+        grid-template-columns: 1fr;
+      }
+
+      .video-card-wrapper {
+        width: 90%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="hero-header">
+    <div class="overlay"></div>
+    <h1>ABOUT US</h1>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="logo">
+        <span>Signoff</span>
+        <span>Coffee</span>
+      </div>
+
+      <div class="menu-toggle" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </div>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li class="dropdown">
+          <a href="about.html">About <i class="fa fa-caret-down"></i></a>
+          <ul class="dropdown-menu">
+            <li><a href="vision.html">Vision, Mission & Objective</a></li>
+            <li><a href="moments.html">Our Moments</a></li>
+          </ul>
+        </li>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="reward.html">Rewards</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Video Grid -->
+  <div class="video-section">
+  <div class="video-card-wrapper">
+    <div class="video-card" onclick="toggleVideo(0)">
+      <video muted playsinline preload="metadata" poster="" src="services/fesko.mp4"></video>
+    </div>
+    <div class="caption">Booth di FESKO UiTM</div>
+  </div>
+
+  <div class="video-card-wrapper">
+    <div class="video-card" onclick="toggleVideo(1)">
+      <video muted playsinline preload="metadata" poster="" src="services/wedding.mp4"></video>
+    </div>
+    <div class="caption">Catering Wedding</div>
+  </div>
+
+  <div class="video-card-wrapper">
+    <div class="video-card" onclick="toggleVideo(2)">
+      <video muted playsinline preload="metadata" poster="" src="services/buatcoffee.mp4"></video>
+    </div>
+    <div class="caption">Proses Buat Coffee</div>
+  </div>
+
+  <div class="video-card-wrapper">
+    <div class="video-card" onclick="toggleVideo(3)">
+      <video muted playsinline preload="metadata" poster="" src="services/setup.mp4"></video>
+    </div>
+    <div class="caption">Setup Kedai</div>
+  </div>
+</div>
+
+
+  <!-- Video Modal -->
+  <div id="videoModal" class="modal" onclick="closeModal(event)">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal(event)">&times;</span>
+      <video id="modalVideo" controls autoplay></video>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer-divider"></div>
+
+  <footer>
+    <div class="footer-links">Terms & Conditions | Privacy Policy</div>
+    <div class="social-icons">
+      <a href="https://wa.me/60166141438" target="_blank"><i class="fab fa-whatsapp"></i></a>
+      <a href="https://www.instagram.com/signoffcoffee_" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.tiktok.com/@signoffcoffee" target="_blank"><i class="fab fa-tiktok"></i></a>
+    </div>
+    <p>Created: 25 June 2025 | Last updated: <span id="lastUpdated"></span></p>
+    <p>&copy; 2025 Signoff Coffee. All rights reserved.</p>
+  </footer>
+
+  <!-- JS -->
+  <script>
+    // Last Updated Date
+    const updated = new Date();
+    const months = ['January', 'February', 'March', 'April', 'May', 'June',
+      'July', 'August', 'September', 'October', 'November', 'December'];
+    const lastUpdated = `${updated.getDate()} ${months[updated.getMonth()]} ${updated.getFullYear()}`;
+    document.getElementById("lastUpdated").textContent = lastUpdated;
+
+    // Toggle Navbar
+    function toggleMenu() {
+      document.getElementById('navLinks').classList.toggle('show');
+    }
+
+    // Video Modal Logic
+    const videoSources = [
+      "services/fesko.mp4",
+      "services/wedding.mp4",
+      "services/buatcoffee.mp4",
+      "services/setup.mp4"
+    ];
+
+    const modal = document.getElementById("videoModal");
+    const modalVideo = document.getElementById("modalVideo");
+
+    function toggleVideo(index) {
+      modal.style.display = "flex";
+      modalVideo.src = videoSources[index];
+      modalVideo.play();
+    }
+
+    function closeModal(event) {
+      if (event.target === modal || event.target.classList.contains('close-btn')) {
+        modal.style.display = "none";
+        modalVideo.pause();
+        modalVideo.src = "";
+      }
+    }
+  </script>
+</body>
+</html>

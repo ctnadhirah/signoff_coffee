@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Signoff Coffee - Menu</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      background-color: #000;
+      color: #fff;
+      scroll-behavior: smooth;
+    }
+
+    .hero-header {
+      background: url('homepage/kedai.jpg') center center/cover no-repeat;
+      height: 60vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-header .overlay {
+      position: absolute;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.6);
+    }
+    .hero-header h1 {
+      position: relative;
+      color: white;
+      font-size: 4rem;
+      font-weight: bold;
+      z-index: 2;
+      text-align: center;
+      letter-spacing: 2px;
+    }
+
+    .navbar {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 2rem;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      border: 2px solid #ffffff;
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      color: #fff;
+      font-weight: bold;
+      font-size: 1.2rem;
+      text-transform: uppercase;
+      text-align: center;
+      line-height: 1.2;
+      width: 110px;
+      white-space: nowrap;
+    }
+
+    .logo span {
+      display: block;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+      z-index: 99;
+      flex-wrap: wrap;
+    }
+
+    .nav-links li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links li a:hover {
+      color: #ffcc80;
+    }
+
+    .services-section {
+      position: relative;
+      padding: 140px 20px 80px;
+      text-align: center;
+      z-index: 1;
+      color: white;
+      min-height: 100vh;
+    }
+
+    .services-overlay {
+      position: absolute;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.6);
+      z-index: 1;
+    }
+
+    .services-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .services-content h2 {
+      font-size: 2.8rem;
+      color: #ffcc80;
+      margin-bottom: 40px;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      padding: 0 20px;
+    }
+
+    .service-card {
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 30px 20px;
+      box-shadow: 0 0 10px rgba(255, 204, 128, 0.2);
+      transition: 0.3s ease;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .service-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 0 15px rgba(255, 204, 128, 0.4);
+    }
+
+    .service-card i {
+      font-size: 2.5rem;
+      color: #ffcc80;
+      margin-bottom: 15px;
+    }
+
+    .service-card h3 {
+      margin-bottom: 10px;
+      font-size: 1.4rem;
+      color: #white;
+    }
+
+    .service-card p {
+      font-size: 0.95rem;
+      color: #ffcc80;
+      line-height: 1.6;
+      font-weight: bold;
+      background-color: rgba(0, 0, 0, 0.4); /* kotak transparent */
+      padding: 8px;
+      border-radius: 6px;
+      display: inline-block;
+    }
+
+    .book-btn {
+      display: none;
+      margin-top: 15px;
+      padding: 10px 18px;
+      background-color: #ffcc80;
+      border: none;
+      border-radius: 8px;
+      color: #000;
+      font-weight: bold;
+      text-decoration: none;
+      text-align: center;
+      transition: 0.3s;
+    }
+
+    .book-btn:hover {
+      background-color: #ffc966;
+    }
+
+    .footer-divider {
+      height: 2px;
+      width: 100%;
+      background: #ffffff;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+      margin-top: 20px;
+    }
+
+    footer {
+      background-color: #000000;
+      color: #ffffff;
+      padding: 30px 15px;
+      text-align: center;
+      user-select: none;
+    }
+
+    .footer-links {
+      margin: 8px 0;
+    }
+
+    .footer-links a {
+      color: #ccc;
+      margin: 0 10px;
+      font-size: 0.9rem;
+      text-decoration: none;
+    }
+
+    .footer-links a:hover {
+      text-decoration: underline;
+    }
+
+    .social-icons {
+      margin: 10px 0;
+    }
+
+    .social-icons a {
+      color: white;
+      font-size: 1.5rem;
+      margin: 0 12px;
+      transition: 0.3s;
+    }
+
+    .social-icons a:hover {
+      color: #ffcc80;
+    }
+
+    footer p {
+      margin-top: 10px;
+      font-size: 0.9rem;
+      color: #cccccc;
+    }
+
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: flex;
+      }
+
+      .nav-links {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.95);
+        padding: 2rem 1rem;
+        display: none;
+        gap: 1.2rem;
+        border-top: 1px solid #333;
+        z-index: 99;
+      }
+
+      .nav-links.show {
+        display: flex;
+      }
+
+      .hero-header h1 {
+        font-size: 2.2rem;
+      }
+  </style>
+</head>
+
+<body>
+  <body>
+  <header class="hero-header">
+    <div class="overlay"></div>
+    <h1>SERVICES</h1>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="logo">
+        <span>Signoff</span>
+        <span>Coffee</span>
+      </div>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="reward.html">Rewards</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Services Section -->
+  <section class="services-section">
+    <div class="services-overlay"></div>
+    <div class="services-content">
+      <div class="services-grid">
+        <div class="service-card" style="background-image: url('services/specialtycoffe.jpg'); background-size: cover; background-position: center;" onclick="showBooking(this)">
+          <i class="fas fa-mug-hot"></i>
+          <h3>Specialty Coffee</h3>
+          <p><strong>Freshly brewed premium beans prepared daily by our expert baristas.</strong></p>
+          <a class="book-btn" href="https://wa.link/jewifg" target="_blank">Book Now!</a>
+        </div>
+        <div class="service-card" style="background-image: url('services/deliveryservice.jpg'); background-size: cover; background-position: center;" onclick="showBooking(this)">
+          <i class="fas fa-truck"></i>
+          <h3>Delivery Service</h3>
+          <p><strong>Fast and hot coffee delivered right to your doorstep.</strong></p>
+          <a class="book-btn" href="https://wa.me/60166141438?text=Hi%20Signoff%20Coffee!%20I%20want%20to%20book%20Delivery%20Service." target="_blank">Book Now!</a>
+        </div>
+        <div class="service-card" style="background-image: url('services/cateringcoffee.jpg'); background-size: cover; background-position: center;" onclick="showBooking(this)">
+          <i class="fas fa-users"></i>
+          <h3>Catering</h3>
+          <p><strong>Perfect coffee catering solutions for events and corporate meetings.</strong></p>
+          <a class="book-btn" href="https://wa.me/60166141438?text=Hi%20Signoff%20Coffee!%20Please%20book%20me%20for%20Catering%20Service." target="_blank">Book Now!</a>
+        </div>
+        <div class="service-card" style="background-image: url('services/artcoffee.jpg'); background-size: cover; background-position: center;" onclick="showBooking(this)">
+          <i class="fas fa-chalkboard-teacher"></i>
+          <h3>Barista Workshop</h3>
+          <p><strong>Join our fun and engaging classes to learn the art of coffee brewing.</strong></p>
+          <a class="book-btn" href="https://wa.me/60166141438?text=Hi%20Signoff%20Coffee!%20I'm%20interested%20in%20Barista%20Workshop." target="_blank">Book Now!</a>
+        </div>
+        <div class="service-card" style="background-image: url('services/ecofriendly.jpg'); background-size: cover; background-position: center;" onclick="showBooking(this)">
+          <i class="fas fa-seedling"></i>
+          <h3>Eco-friendly Cups</h3>
+          <p><strong>Support sustainability with our reusable and biodegradable coffee cups.</strong></p>
+          <a class="book-btn" href="https://wa.me/60166141438?text=Hi!%20I%20would%20like%20to%20know%20more%20about%20eco-friendly%20cups." target="_blank">Book Now!</a>
+        </div>
+        <div class="service-card" style="background-image: url('services/coffeecustom.jpg'); background-size: cover; background-position: center;" onclick="showBooking(this)">
+          <i class="fas fa-gift"></i>
+          <h3>Gift Packs</h3>
+          <p><strong>Customizable gift sets perfect for coffee lovers and special occasions.</strong></p>
+          <a class="book-btn" href="https://wa.me/60166141438?text=Hi%20Signoff!%20Tell%20me%20more%20about%20Gift%20Packs." target="_blank">Book Now!</a>
+        </div>
+        <div class="service-card" style="background-image: url('services/booth.jpg'); background-size: cover; background-position: center;" onclick="showBooking(this)">
+          <i class="fas fa-store"></i>
+          <h3>Pop-up Booth</h3>
+          <p><strong>Invite us to your event – we bring the full coffee shop experience!</strong></p>
+          <a class="book-btn" href="https://wa.me/60166141438?text=I'd%20like%20to%20book%20a%20Pop-up%20Booth." target="_blank">Book Now!</a>
+        </div>
+       <div class="service-card" style="background-image: url('services/carboat.jpg'); background-size: cover; background-position: center;" onclick="showBooking(this)">
+          <i class="fas fa-heart"></i>
+          <h3>Community Events</h3>
+          <p><strong>Join our monthly gatherings celebrating art, music, and good coffee.</strong></p>
+          <a class="book-btn" href="https://wa.me/60166141438?text=Hi!%20I'm%20interested%20in%20Community%20Events%20you%20host." target="_blank">Join Now!</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <div class="footer-divider"></div>
+
+  <footer>
+    <div class="footer-links">
+      Terms & Conditions | Privacy Policy
+    </div>
+
+    <div class="social-icons">
+      <a href="https://wa.me/60166141438" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+      <a href="https://www.instagram.com/signoffcoffee_?igsh=c21lZnd2eDJ4ejhr" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.tiktok.com/@signoffcoffee?_t=ZS-8xZk1xynBie&_r=1" target="_blank" title="TikTok"><i class="fab fa-tiktok"></i></a>
+    </div>
+
+    <p>Created: 25 June 2025 | Last updated: <span id="lastUpdated"></span></p>
+    <p>&copy; 2025 Signoff Coffee. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const updated = new Date();
+    const months = ['January', 'February', 'March', 'April', 'May', 'June',
+                    'July', 'August', 'September', 'October', 'November', 'December'];
+    const lastUpdated = `${updated.getDate()} ${months[updated.getMonth()]} ${updated.getFullYear()}`;
+    document.getElementById("lastUpdated").textContent = lastUpdated;
+  </script>
+
+  <script>
+    function toggleMenu() {
+      const nav = document.getElementById('navLinks');
+      nav.classList.toggle('show');
+    }
+
+    function showTab(tabId, btn) {
+      document.querySelectorAll('.menu-tab').forEach(tab => tab.classList.remove('active'));
+      document.querySelectorAll('.tab-buttons button').forEach(button => button.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+      btn.classList.add('active');
+    }
+  </script>
+</body>
+</html>

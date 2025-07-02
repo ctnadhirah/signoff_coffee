@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Signoff Coffee</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      background-color: #000;
+      color: #fff;
+      scroll-behavior: smooth;
+    }
+
+    header {
+      background: url(homepage/kedai.jpg) no-repeat center center/cover;
+      height: 100vh;
+      position: relative;
+    }
+
+    header::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 1;
+    }
+
+    .navbar {
+      position: relative;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 2rem;
+      flex-wrap: wrap;
+    }
+
+    .left-controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo {
+      border: 2px solid #ffffff;
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      color: #fff;
+      font-weight: bold;
+      font-size: 1.2rem;
+      text-transform: uppercase;
+      text-align: center;
+      line-height: 1.2;
+      cursor: default;
+      user-select: none;
+      width: 110px;
+      white-space: nowrap;
+    }
+
+    .logo span { display: block; }
+
+    .language-switch {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .language-switch img {
+      width: 30px;
+      height: 20px;
+      cursor: pointer;
+      border: 1px solid #fff;
+      border-radius: 3px;
+      transition: transform 0.2s;
+    }
+
+    .language-switch img:hover {
+      transform: scale(1.1);
+    }
+
+    .right-controls {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+    }
+
+    .left-section {
+      display: flex;
+      align-items: center;
+      gap: 12px; /* ruang antara logo dan bendera */
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 1.2rem;
+      align-items: center;
+      z-index: 99;
+      flex-wrap: wrap;
+    }
+
+    .nav-links li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links li a:hover {
+      color: #ffcc80;
+    }
+
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      z-index: 101;
+    }
+
+    .menu-toggle span {
+      height: 3px;
+      width: 25px;
+      background: white;
+      margin: 4px 0;
+      transition: 0.3s;
+    }
+
+    .search-wrapper {
+      position: relative;
+    }
+
+    .search-wrapper input {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      margin-top: 5px;
+      padding: 6px 10px;
+      border-radius: 20px;
+      border: none;
+      outline: none;
+      width: 180px;
+      display: none;
+      background-color: #fff;
+      color: #000;
+      z-index: 999;
+    }
+
+    .search-wrapper input.show {
+      display: block;
+    }
+
+    .search-wrapper button {
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+      font-size: 1.2rem;
+    }
+
+    .hero-text {
+      position: absolute;
+      z-index: 1;
+      top: 55%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .hero-text h1 {
+      font-size: 3rem;
+      margin-bottom: 0.1rem;
+      letter-spacing: 2px;
+    }
+
+    .hero-text p {
+      font-size: 1.2rem;
+      color: #ddd;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-text button {
+      padding: 0.8rem 1.8rem;
+      border: none;
+      border-radius: 30px;
+      font-weight: bold;
+      background-color: #ffcc80;
+      color: #000;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: 0.3s ease;
+    }
+
+    .hero-text button:hover {
+      background-color: #e6b56a;
+      transform: scale(1.05);
+    }
+
+    .footer-divider {
+      height: 2px;
+      width: 100%;
+      background: white;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+      margin: 0;
+    }
+
+    footer {
+      background-color: #000000;
+      color: #ffffff;
+      padding: 30px 15px;
+      text-align: center;
+      user-select: none;
+    }
+
+    .footer-links {
+      margin: 8px 0;
+    }
+
+    .footer-links a {
+      color: #ccc;
+      margin: 0 10px;
+      font-size: 0.9rem;
+      text-decoration: none;
+    }
+
+    .footer-links a:hover {
+      text-decoration: underline;
+    }
+
+    .social-icons {
+      margin: 10px 0;
+    }
+
+    .social-icons a {
+      color: white;
+      font-size: 1.5rem;
+      margin: 0 12px;
+      transition: 0.3s;
+    }
+
+    .social-icons a:hover {
+      color: #ffcc80;
+    }
+
+    footer p {
+      margin-top: 10px;
+      font-size: 0.9rem;
+      color: #cccccc;
+    }
+
+    @media (max-width: 768px) {
+      .menu-toggle {
+      display: flex;
+      }
+
+    .nav-links {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.95);
+      padding: 2rem 1rem;
+      display: none;
+      gap: 1.2rem;
+      border-top: 1px solid #333;
+      z-index: 99;
+      }
+
+    .nav-links.show {
+      display: flex;
+      }
+
+    .right-controls {
+      flex-direction: column;
+      gap: 0.5rem;
+      }
+
+    .hero-text h1 {
+      font-size: 2.2rem;
+      }
+
+    .hero-text p {
+      font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+    <div class="left-controls">
+      <div class="left-section">
+        <div class="logo">
+          <span>Signoff</span>
+          <span>Coffee</span>
+        </div>
+        <div class="language-switch">
+          <img src="https://flagcdn.com/w40/my.png" alt="Malay" onclick="setLanguage('ms')" title="Bahasa Melayu">
+          <img src="https://flagcdn.com/w40/us.png" alt="English" onclick="setLanguage('en')" title="English">
+        </div>
+      </div>
+    </div>
+
+      <div class="menu-toggle" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </div>
+
+      <div class="right-controls">
+        <ul class="nav-links" id="navLinks">
+          <li><a href="index.html" data-text="home">Home</a></li>
+          <li><a href="about.html" data-text="about">About</a></li>
+          <li><a href="menu.html" data-text="menu">Menu</a></li>
+          <li><a href="services.html" data-text="services">Services</a></li>
+          <li><a href="reward.html" data-text="rewards">Rewards</a></li>
+          <li><a href="contact.html" data-text="contact">Contact</a></li>
+        </ul>
+
+        <div class="search-wrapper">
+          <button id="toggleSearch"><i class="fas fa-search"></i></button>
+          <input type="text" id="siteSearch" placeholder="Search..." />
+        </div>
+      </div>
+    </nav>
+
+    <div class="hero-text">
+      <h1>SIGNOFF COFFEE</h1>
+      <p id="heroTagline">🌊 Kopi tika off 🌊</p>
+      <button onclick="location.href='menu.html'" id="exploreBtn">Explore More</button>
+    </div>
+  </header>
+
+
+  <!-- Footer -->
+  <div class="footer-divider"></div>
+
+  <footer>
+    <div class="footer-links">
+      Terms & Conditions | Privacy Policy
+    </div>
+
+    <div class="social-icons">
+      <a href="https://wa.me/60166141438" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+      <a href="https://www.instagram.com/signoffcoffee_?igsh=c21lZnd2eDJ4ejhr" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.tiktok.com/@signoffcoffee?_t=ZS-8xZk1xynBie&_r=1" target="_blank" title="TikTok"><i class="fab fa-tiktok"></i></a>
+    </div>
+
+    <p>Created: 25 June 2025 | Last updated: <span id="lastUpdated"></span></p>
+    <p>&copy; 2025 Signoff Coffee. All rights reserved.</p>
+  </footer>
+
+  <script>
+    let currentLang = "eng"; // Default language
+
+    function updateLastUpdatedDate(lang) {
+      const options = { day: 'numeric', month: 'long', year: 'numeric' };
+      const locale = lang === "ms" ? "ms-MY" : "en-GB";
+      document.getElementById("lastUpdated").textContent = new Date().toLocaleDateString(locale, options);
+    }
+
+    function toggleMenu() {
+      document.getElementById('navLinks').classList.toggle('show');
+    }
+
+    document.getElementById("toggleSearch").addEventListener("click", function () {
+      const input = document.getElementById("siteSearch");
+      input.classList.toggle("show");
+      if (input.classList.contains("show")) input.focus();
+    });
+
+    document.getElementById("siteSearch").addEventListener("keypress", function(e) {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        searchSite();
+      }
+    });
+
+    function searchSite() {
+      const query = document.getElementById('siteSearch').value.toLowerCase().trim();
+      const pageMap = {
+        "home": "index.html", "about": "about.html", "menu": "menu.html",
+        "services": "services.html", "reward": "reward.html", "contact": "contact.html",
+        "hubungi": "contact.html"
+      };
+      if (pageMap[query]) window.location.href = pageMap[query];
+      else alert("No match found. Try 'menu', 'about', etc.");
+    }
+
+    const translations = {
+      ms: {
+        home: "Laman",
+        about: "Tentang",
+        menu: "Menu",
+        services: "Perkhidmatan",
+        rewards: "Ganjaran",
+        contact: "Hubungi",
+        explore: "Lihat Lagi",
+        tagline: "🌊 Kopi tika off 🌊",
+        searchPlaceholder: "Cari...",
+        footerLinks: "Terma & Syarat | Dasar Privasi",
+        created: "Dicipta:",
+        updated: "Kemaskini:",
+        rights: "Hak cipta terpelihara."
+      },
+      en: {
+        home: "Home",
+        about: "About",
+        menu: "Menu",
+        services: "Services",
+        rewards: "Rewards",
+        contact: "Contact",
+        explore: "Explore More",
+        tagline: "🌊 Coffee on your time off 🌊",
+        searchPlaceholder: "Search...",
+        footerLinks: "Terms & Conditions | Privacy Policy",
+        created: "Created:",
+        updated: "Last updated:",
+        rights: "All rights reserved."
+      }
+    };
+
+    function setLanguage(lang) {
+      currentLang = lang;
+
+      document.querySelectorAll(".nav-links a").forEach(link => {
+        const key = link.dataset.text;
+        if (translations[lang][key]) link.textContent = translations[lang][key];
+      });
+
+      document.getElementById("exploreBtn").textContent = translations[lang].explore;
+      document.getElementById("heroTagline").textContent = translations[lang].tagline;
+      document.getElementById("siteSearch").placeholder = translations[lang].searchPlaceholder;
+
+      document.querySelectorAll("[data-text]").forEach(el => {
+        const key = el.dataset.text;
+        if (translations[lang][key]) el.textContent = translations[lang][key];
+      });
+
+      updateLastUpdatedDate(lang);
+    }
+
+    window.onload = () => setLanguage("en");
+  </script>
+</body>
+</html>

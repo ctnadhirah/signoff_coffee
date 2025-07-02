@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Signoff Coffee - Menu</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      background-color: #000;
+      color: #fff;
+      scroll-behavior: smooth;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    body > main {
+      flex: 1;
+    }
+
+    .hero-header {
+      background: url('homepage/kedai.jpg') center center/cover no-repeat;
+      height: 60vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-header .overlay {
+      position: absolute;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.6);
+    }
+    .hero-header h1 {
+      position: relative;
+      color: white;
+      font-size: 4rem;
+      font-weight: bold;
+      z-index: 2;
+      text-align: center;
+      letter-spacing: 2px;
+    }
+
+    .navbar {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 2rem;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      border: 2px solid #ffffff;
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      color: #fff;
+      font-weight: bold;
+      font-size: 1.2rem;
+      text-transform: uppercase;
+      text-align: center;
+      line-height: 1.2;
+      width: 110px;
+      white-space: nowrap;
+    }
+
+    .logo span {
+      display: block;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+      z-index: 99;
+      flex-wrap: wrap;
+    }
+
+    .nav-links li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links li a:hover {
+      color: #ffcc80;
+    }
+
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      z-index: 101;
+    }
+
+    .menu-toggle span {
+      height: 3px;
+      width: 25px;
+      background: white;
+      margin: 4px 0;
+      transition: 0.3s;
+    }
+
+    .menu-section {
+      padding: 4rem 1rem;
+      background-color: #000;
+      color: #fff;
+    }
+
+    .menu-section h2 {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      text-align: center;
+      color: #ffcc80;
+      text-shadow: 0 0 15px #ffcc80;
+    }
+
+    .tab-buttons {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .tab-buttons button {
+      padding: 10px 20px;
+      margin: 5px;
+      background: #fff;
+      color: #000;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .tab-buttons button.active {
+      background: #ffcc80;
+      color: #000;
+    }
+
+    .menu-tab {
+      display: none;
+    }
+
+    .menu-tab.active {
+      display: block;
+    }
+
+    .menu-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      justify-content: center;
+    }
+
+    .menu-card {
+      background-color: #1e1e1e;
+      border-radius: 10px;
+      padding: 1rem;
+      text-align: center;
+      width: 150px;
+      transition: transform 0.3s ease;
+    }
+
+    .menu-card img {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .menu-card h3 {
+      margin: 0.5rem 0 0.2rem;
+    }
+
+    .menu-card p {
+      font-size: 0.9rem;
+      color: #ffcc80;
+    }
+
+    .menu-card:hover {
+      transform: scale(1.05);
+    }
+
+    .footer-divider {
+      height: 2px;
+      width: 100%;
+      background: white;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+      margin-top: -4px;
+    }
+
+    .card {
+      width: 220px;
+      height: 340px;
+      border-radius: 12px;
+      transform-style: preserve-3d;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .card .product {
+      height: 85%;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      position: relative;
+      transform-style: preserve-3d;
+    }
+
+    .product .number {
+      font-size: 80px;
+      line-height: 80px;
+      font-style: italic;
+      opacity: 0.25;
+    }
+
+    .product .sneakers {
+      font-size: 35px;
+      line-height: 35px;
+      font-style: italic;
+      opacity: 0.7;
+    }
+
+    .product img {
+      height: 280px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate3d(-35%, -45%, 0);
+      pointer-events: none;
+    }
+
+    .product .price {
+      background: rgba(255, 255, 255, 0.15);
+      margin-top: auto;
+      margin-left: auto;
+      margin-right: -20px;
+      padding: 5px 20px;
+      border-radius: 99px 0 0 99px;
+    }
+
+    .card .title {
+      height: 15%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 0 0 12px 12px;
+      transform-style: preserve-3d;
+    }
+
+    .title h2 {
+      font-size: 1.5rem; 
+      font-weight: 600;
+      margin: 0;
+      text-align: center;
+    }
+
+    .card.blue {
+      background: linear-gradient(135deg, #09AFFF, #125575);
+    }
+
+    .card.purple {
+      background: linear-gradient(135deg, #5911F2, #125575);
+    }
+
+    .card.blue .title,
+    .card.purple .title {
+      background: #039BE5;
+    }
+
+    .card:hover .product img {
+      transform: translate3d(-50%, -40%, 80px);
+    }
+
+    .card:hover .product .number,
+    .card:hover .product .sneakers,
+    .card:hover .title h2 {
+      transform: translateZ(40px);
+      opacity: 1;
+    }
+
+    .card:hover .product .price {
+      transform: translateZ(20px);
+    }
+
+    .card {
+      width: 220px;
+      height: 340px;
+      border-radius: 12px;
+      transform-style: preserve-3d;
+      font-family: 'Poppins', sans-serif;
+      box-shadow: 0 0 20px rgba(255, 204, 128, 0.3); /* subtle glow */
+      transition: box-shadow 0.3s ease;
+    }
+
+    .footer-divider {
+      height: 2px;
+      width: 100%;
+      background: #fff;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+      margin-top: 20px;
+    }
+
+    footer {
+      background-color: #000000;
+      color: #ffffff;
+      padding: 30px 15px;
+      text-align: center;
+      user-select: none;
+    }
+
+    .footer-links {
+      margin: 8px 0;
+    }
+
+    .footer-links a {
+      color: #ccc;
+      margin: 0 10px;
+      font-size: 0.9rem;
+      text-decoration: none;
+    }
+
+    .footer-links a:hover {
+      text-decoration: underline;
+    }
+
+    .social-icons {
+      margin: 10px 0;
+    }
+
+    .social-icons a {
+      color: white;
+      font-size: 1.5rem;
+      margin: 0 12px;
+      transition: 0.3s;
+    }
+
+    .social-icons a:hover {
+      color: #ffcc80;
+    }
+
+    footer p {
+      margin-top: 10px;
+      font-size: 0.9rem;
+      color: #cccccc;
+    }
+
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: flex;
+      }
+
+      .nav-links {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.95);
+        padding: 2rem 1rem;
+        display: none;
+        gap: 1.2rem;
+        border-top: 1px solid #333;
+        z-index: 99;
+      }
+
+      .nav-links.show {
+        display: flex;
+      }
+
+      .hero-header h1 {
+        font-size: 2.2rem;
+      }
+  </style>
+</head>
+
+<body>
+  <main>
+  <header class="hero-header">
+    <div class="overlay"></div>
+    <h1>OUR MENU</h1>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="logo">
+        <span>Signoff</span>
+        <span>Coffee</span>
+      </div>
+
+      <div class="menu-toggle" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </div>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="reward.html">Rewards</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Menu Section -->
+  <section class="menu-section">
+    <h2>Explore Our Drinks</h2>
+
+    <div class="tab-buttons">
+      <button class="active" onclick="showTab('coffee', this)">Coffee</button>
+      <button onclick="showTab('noncoffee', this)">Non-Coffee</button>
+    </div>
+
+  <!-- Coffee -->
+  <br>
+  <div id="coffee" class="menu-tab active">
+  <section style="display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; margin-top: 4rem;">
+  <div class="card white">
+    <div class="product">
+      <span class="number">01</span>
+      <span class="price">RM7</span>
+      <img src="menu/kopi.png" alt="Latte">
+    </div>
+    <div class="title">
+      <h2>Latte</h2>
+    </div>
+  </div>
+
+  <div class="card white">
+    <div class="product">
+      <span class="number">02</span>
+      <span class="price">RM9</span>
+      <img src="menu/dolce.png" alt="Asian Dolce">
+    </div>
+    <div class="title">
+      <h2>Asian Dolce Latte</h2>
+    </div>
+  </div>
+
+  <div class="card white">
+    <div class="product">
+      <span class="number">03</span>
+      <span class="price">RM9</span>
+      <img src="menu/caramel.png" alt="Caramel Latte">
+    </div>
+    <div class="title">
+      <h2>Caramel Latte</h2>
+    </div>
+  </div>
+
+  <div class="card white">
+    <div class="product">
+      <span class="number">04</span>
+      <span class="price">RM9</span>
+      <img src="menu/macchiato.png" alt="Caramel Macchiato">
+    </div>
+    <div class="title">
+      <h2>Caramel Macchiato</h2>
+    </div>
+  </div>
+
+  <div class="card white">
+    <div class="product">
+      <span class="number">05</span>
+      <span class="price">RM9</span>
+      <img src="menu/spanish.png" alt="Spanish Latte">
+    </div>
+    <div class="title">
+      <h2>Spanish Latte</h2>
+    </div>
+  </div>
+
+  <div class="card white">
+    <div class="product">
+      <span class="number">06</span>
+      <span class="price">RM9</span>
+      <img src="menu/strawberry.png" alt="Strawberry Latte">
+    </div>
+    <div class="title">
+      <h2>Strawberry Latte</h2>
+    </div>
+  </div>
+</section>
+</div>
+
+  <!-- Non-Coffee -->
+  <div id="noncoffee" class="menu-tab">
+  <section style="display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; margin-top: 4rem;">
+  <div class="card white">
+    <div class="product">
+      <span class="number">01</span>
+      <span class="price">RM9</span>
+      <img src="menu/matcha.png" alt="Matcha">
+    </div>
+    <div class="title">
+      <h2>Matcha</h2>
+    </div>
+  </div>
+
+  <div class="card white">
+    <div class="product">
+      <span class="number">02</span>
+      <span class="price">RM9</span>
+      <img src="menu/choc.png" alt="Chocolate Caramel">
+    </div>
+    <div class="title">
+      <h2>Chocolate Caramel</h2>
+    </div>
+  </div>
+
+  <div class="card white">
+    <div class="product">
+      <span class="number">03</span>
+      <span class="price">RM9</span>
+      <img src="menu/peach.png" alt="Matcha Peach">
+    </div>
+    <div class="title">
+      <h2>Matcha Peach</h2>
+    </div>
+  </div>
+
+  <div class="card white">
+    <div class="product">
+      <span class="number">04</span>
+      <span class="price">RM9</span>
+      <img src="menu/berry.png" alt="Strawberry Matcha">
+    </div>
+    <div class="title">
+      <h2>Strawberry Matcha</h2>
+    </div>
+  </div>
+
+  <div class="card white">
+    <div class="product">
+      <span class="number">05</span>
+      <span class="price">RM9</span>
+      <img src="menu/milk.png" alt="Creamy Strawberry Milk">
+    </div>
+    <div class="title">
+      <h2>Creamy Strawberry Milk</h2>
+    </div>
+  </div>
+
+  <div class="card white">
+    <div class="product">
+      <span class="number">06</span>
+      <span class="price">RM9</span>
+      <img src="menu/lychee.png" alt="Strawberry Lychee Sparkling">
+    </div>
+    <div class="title">
+      <h2>Strawberry Lychee Sparkling</h2>
+    </div>
+  </div>
+</section>
+</main>
+<br>
+  <main>
+  <!-- Footer -->
+  <div class="footer-divider"></div>
+
+  <footer>
+    <div class="footer-links">
+      Terms & Conditions | Privacy Policy
+    </div>
+
+    <div class="social-icons">
+      <a href="https://wa.me/60166141438" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+      <a href="https://www.instagram.com/signoffcoffee_?igsh=c21lZnd2eDJ4ejhr" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.tiktok.com/@signoffcoffee?_t=ZS-8xZk1xynBie&_r=1" target="_blank" title="TikTok"><i class="fab fa-tiktok"></i></a>
+    </div>
+
+    <p>Created: 25 June 2025 | Last updated: <span id="lastUpdated"></span></p>
+    <p>&copy; 2025 Signoff Coffee. All rights reserved.</p>
+  </footer>
+</main>
+
+  <script>
+    const updated = new Date();
+    const months = ['January', 'February', 'March', 'April', 'May', 'June',
+                    'July', 'August', 'September', 'October', 'November', 'December'];
+    const lastUpdated = `${updated.getDate()} ${months[updated.getMonth()]} ${updated.getFullYear()}`;
+    document.getElementById("lastUpdated").textContent = lastUpdated;
+  </script>
+
+  <script>
+    function toggleMenu() {
+      const nav = document.getElementById('navLinks');
+      nav.classList.toggle('show');
+    }
+  </script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
+  <script>
+    VanillaTilt.init(document.querySelectorAll(".card"), {
+      max: 25,
+      speed: 5000,
+      glare: true,
+      "max-glare": 0.5
+    });
+  </script>
+
+  <script>
+    const updated = new Date();
+    const months = ['January', 'February', 'March', 'April', 'May', 'June',
+                    'July', 'August', 'September', 'October', 'November', 'December'];
+    const lastUpdated = `${updated.getDate()} ${months[updated.getMonth()]} ${updated.getFullYear()}`;
+    document.getElementById("lastUpdated").textContent = lastUpdated;
+  </script>
+
+  <script>
+    function toggleMenu() {
+      const nav = document.getElementById('navLinks');
+      nav.classList.toggle('show');
+    }
+
+    function showTab(tabId, btn) {
+    document.querySelectorAll('.menu-tab').forEach(tab => tab.classList.remove('active'));
+    document.querySelectorAll('.tab-buttons button').forEach(button => button.classList.remove('active'));
+    document.getElementById(tabId).classList.add('active');
+    btn.classList.add('active');
+    }
+
+  </script>
+</body>
+</html>

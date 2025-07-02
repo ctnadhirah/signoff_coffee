@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Signoff Coffee - Rewards</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      background-color: #000;
+      color: #fff;
+      scroll-behavior: smooth;
+    }
+
+    .hero-header {
+      background: url('homepage/kedai.jpg') center center/cover no-repeat;
+      height: 60vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-header .overlay {
+      position: absolute;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.6);
+    }
+
+    .hero-header h1 {
+      position: relative;
+      color: white;
+      font-size: 4rem;
+      font-weight: bold;
+      z-index: 2;
+      text-align: center;
+      letter-spacing: 2px;
+    }
+
+    .navbar {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 2rem;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      border: 2px solid #fff;
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      color: #fff;
+      font-weight: bold;
+      font-size: 1.2rem;
+      text-transform: uppercase;
+      text-align: center;
+      width: 110px;
+    }
+
+    .logo span { display: block; }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-links li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    .nav-links li a:hover {
+      color: #ffcc80;
+    }
+
+    .rewards-section, .membership-section {
+      padding: 60px 20px;
+      background-color: #000;
+      text-align: center;
+    }
+
+    .rewards-section h2, .membership-section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    .rewards-section p, .membership-section p {
+      max-width: 700px;
+      margin: 0 auto 40px;
+      font-size: 1rem;
+      color: #ccc;
+    }
+
+    .reward-cards {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .reward-card {
+      background-color: #1a1a1a;
+      padding: 15px;
+      border-radius: 10px;
+      width: 220px;
+      transition: 0.3s ease;
+      box-shadow: 0 0 0 transparent;
+    }
+
+    .reward-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 15px #ffcc80;
+    }
+
+    .reward-card h3 {
+      font-size: 1.4rem;
+      margin-bottom: 10px;
+    }
+
+    .reward-card p {
+      font-size: 0.9rem;
+      color: #bbb;
+    }
+
+    .reward-card h3 i {
+      margin-right: 8px;
+      text-shadow: 0 0 5px rgba(255,204,128,0.6);
+    }
+
+    .bronze h3 { color: #cd7f32; }
+    .bronze h3 i { color: #cd7f32; }
+
+    .silver h3 { color: #c0c0c0; }
+    .silver h3 i { color: #c0c0c0; }
+
+    .gold h3 { color: #ffd700; }
+    .gold h3 i { color: #ffd700; }
+
+    .weekend-promo {
+      margin-top: 50px;
+      background: #222;
+      border: 2px dashed #ffcc80;
+      padding: 25px;
+      border-radius: 12px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      color: #ffcc80;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 10px #ffcc80; }
+      50% { box-shadow: 0 0 20px #ffcc80; }
+    }
+
+    .membership-form {
+      max-width: 600px;
+      margin: 30px auto 0;
+      text-align: left;
+      background-color: #1a1a1a;
+      padding: 30px;
+      border-radius: 10px;
+    }
+
+    .membership-form label {
+      display: block;
+      margin-bottom: 5px;
+      color: #ccc;
+      font-size: 0.9rem;
+    }
+
+    .membership-form input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: none;
+      border-radius: 6px;
+      background-color: #2a2a2a;
+      color: #fff;
+    }
+
+    .membership-form button {
+      background-color: #ffcc80;
+      color: #000;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 30px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .membership-form button:hover {
+      background-color: #e6b86c;
+    }
+
+    .footer-divider {
+      height: 2px;
+      width: 100%;
+      background: white;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+      margin-top: -4px;
+    }
+
+    footer {
+      background-color: #000;
+      color: #fff;
+      padding: 30px 15px;
+      text-align: center;
+    }
+
+    .footer-links {
+      margin: 8px 0;
+    }
+
+    .footer-links a {
+      color: #ccc;
+      margin: 0 10px;
+      font-size: 0.9rem;
+      text-decoration: none;
+    }
+
+    .footer-links a:hover { text-decoration: underline; }
+
+    .social-icons a {
+      color: white;
+      font-size: 1.5rem;
+      margin: 0 12px;
+      transition: 0.3s;
+    }
+
+    .social-icons a:hover { color: #ffcc80; }
+
+    footer p {
+      margin-top: 10px;
+      font-size: 0.9rem;
+      color: #cccccc;
+    }
+
+    /* Merchandise Glow Effect */
+    .merch-item {
+      background: #1a1a1a;
+      border-radius: 10px;
+      padding: 20px;
+      width: 280px;
+      transition: 0.3s ease;
+      box-shadow: 0 0 0 transparent;
+    }
+
+    .merch-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 15px #ffcc80;
+    }
+
+    @media (max-width: 768px) {
+      .menu-toggle { display: flex; }
+
+      .nav-links {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.95);
+        padding: 2rem 1rem;
+        display: none;
+        gap: 1.2rem;
+        border-top: 1px solid #333;
+        z-index: 99;
+      }
+
+      .nav-links.show { display: flex; }
+      .hero-header h1 { font-size: 2.2rem; }
+      .reward-cards { flex-direction: column; align-items: center; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="hero-header">
+    <div class="overlay"></div>
+    <h1>REWARDS</h1>
+    <nav class="navbar">
+      <div class="logo">
+        <span>Signoff</span>
+        <span>Coffee</span>
+      </div>
+      <div class="menu-toggle" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="reward.html">Rewards</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="rewards-section">
+    <h2>Signoff Rewards</h2>
+    <p>Earn points every time you buy. Collect them and redeem for discounts and free drinks!</p>
+    <div class="reward-cards">
+      <div class="reward-card bronze">
+        <h3><i class="fas fa-trophy"></i> Bronze</h3>
+        <p>Get 1 point for every RM1 spent.</p>
+      </div>
+      <div class="reward-card silver">
+        <h3><i class="fas fa-trophy"></i> Silver</h3>
+        <p>Spend RM100 and level up. Earn 1.5 points per RM1.</p>
+      </div>
+      <div class="reward-card gold">
+        <h3><i class="fas fa-trophy"></i> Gold</h3>
+        <p>Spend RM300 and enjoy 2x points + free coffee monthly!</p>
+      </div>
+    </div>
+
+    <div class="weekend-promo">
+      <h3>Weekend Special</h3>
+      <p>Buy 1 Free 1 on All Cold Brew Drinks – Every Saturday & Sunday!</p>
+    </div>
+  </section>
+
+  <section class="merchandise-section" style="padding: 60px 20px; background: #111; text-align: center;">
+    <h2 style="margin-bottom: 30px;">Signoff Merchandise</h2>
+    <p style="color: #ccc; max-width: 700px; margin: 0 auto 40px;">
+      Bring the Signoff vibe everywhere you go! Grab our exclusive merchandise, stylish apparel and premium tumblers made for coffee lovers.
+    </p>
+
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px;">
+      <div class="merch-item">
+        <img src="homepage/merch.jpg" alt="Signoff T-Shirt" style="width: 100%; border-radius: 8px;">
+        <h3 style="margin-top: 15px; color: #ffcc80;">Coffee Crew Tee</h3>
+        <p style="color: #bbb;">Soft, breathable, and iconic. Available in black & white. RM49.90</p>
+      </div>
+      <div class="merch-item">
+        <img src="homepage/tumbler.jpg" alt="Signoff Tumbler" style="width: 100%; border-radius: 8px;">
+        <h3 style="margin-top: 15px; color: #ffcc80;">Stainless Tumbler</h3>
+        <p style="color: #bbb;">Keeps your brew hot or cold for hours. Minimalist Signoff design. RM39.90</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="membership-section">
+    <h2>Join Signoff Club+</h2>
+    <p>Upgrade your coffee experience with birthday drinks, early access, and exclusive promos.</p>
+
+    <form class="membership-form" id="membershipForm">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" placeholder="Nik Sarah Khadejah binti Nik Zailan" required>
+      <label for="email">Email</label>
+      <input type="email" id="email" placeholder="you@example.com" required>
+      <label for="phone">Phone Number</label>
+      <input type="text" id="phone" placeholder="0123456789" required>
+      <label for="birthday">Birthday</label>
+      <input type="date" id="birthday" required>
+      <button type="submit">Register Membership</button>
+    </form>
+  </section>
+
+  <div class="footer-divider"></div>
+  <footer>
+    <div class="footer-links">
+      Terms & Conditions | Privacy Policy
+    </div>
+    <div class="social-icons">
+      <a href="https://wa.me/60166141438" target="_blank"><i class="fab fa-whatsapp"></i></a>
+      <a href="https://www.instagram.com/signoffcoffee_" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.tiktok.com/@signoffcoffee" target="_blank"><i class="fab fa-tiktok"></i></a>
+    </div>
+    <p>Created: 25 June 2025 | Last updated: <span id="lastUpdated"></span></p>
+    <p>&copy; 2025 Signoff Coffee. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const updated = new Date();
+    const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    document.getElementById("lastUpdated").textContent = `${updated.getDate()} ${months[updated.getMonth()]} ${updated.getFullYear()}`;
+
+    function toggleMenu() {
+      document.getElementById('navLinks').classList.toggle('show');
+    }
+
+    document.getElementById('membershipForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert("Registration successful! Welcome to Signoff Club+.");
+      this.reset();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
+</body>
+</html>

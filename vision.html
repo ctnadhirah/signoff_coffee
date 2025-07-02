@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Signoff Coffee - About</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      background-color: #000;
+      color: #fff;
+      scroll-behavior: smooth;
+    }
+
+    .hero-header {
+      background: url('homepage/kedai.jpg') center center/cover no-repeat;
+      height: 60vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-header .overlay {
+      position: absolute;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.6);
+    }
+
+    .hero-header h1 {
+      position: relative;
+      color: white;
+      font-size: 4rem;
+      font-weight: bold;
+      z-index: 2;
+      text-align: center;
+      letter-spacing: 2px;
+    }
+
+    .navbar {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 2rem;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      border: 2px solid #ffffff;
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      color: #fff;
+      font-weight: bold;
+      font-size: 1.2rem;
+      text-transform: uppercase;
+      text-align: center;
+      line-height: 1.2;
+      width: 110px;
+      white-space: nowrap;
+    }
+
+    .logo span {
+      display: block;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+      z-index: 99;
+      flex-wrap: wrap;
+    }
+
+    .nav-links li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links li a:hover {
+      color: #ffcc80;
+    }
+
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: rgba(0, 0, 0, 0.95);
+      min-width: 200px;
+      padding-left: 0;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+      z-index: 99;
+      list-style: none;
+    }
+
+    .dropdown-menu li {
+      width: 100%;
+    }
+
+    .dropdown-menu li a {
+      display: block;
+      padding: 0.8rem 1.2rem;
+      color: #fff;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .dropdown-menu li a:hover {
+      background-color: #333;
+      color: #ffcc80;
+    }
+
+    .dropdown:hover .dropdown-menu {
+      display: block;
+    }
+
+    .info-section {
+      padding: 60px 20px;
+      background-color: #000;
+      text-align: center;
+    }
+
+    .info-section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+      color: #ffcc80;
+      text-shadow: 0 0 15px #ffcc80;
+    }
+
+    .info-cards {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .info-card {
+      background-color: #1a1a1a;
+      padding: 25px;
+      border-radius: 12px;
+      width: 300px;
+      transition: 0.3s ease;
+      box-shadow: 0 0 0 transparent;
+      text-align: left;
+    }
+
+    .info-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 15px #ffcc80;
+    }
+
+    .info-card h3 {
+      font-size: 1.4rem;
+      margin-bottom: 15px;
+      color: #ffcc80;
+    }
+
+    .info-card ul {
+      padding-left: 1.2rem;
+    }
+
+    .info-card ul li {
+      font-size: 0.95rem;
+      color: #ccc;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+
+    @media (max-width: 768px) {
+      .hamburger { display: block; }
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        gap: 1rem;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        padding: 1rem;
+        position: absolute;
+        top: 70px;
+        left: 0;
+      }
+
+      .nav-links.active { display: flex; }
+      .hero-header h1 { font-size: 2.2rem; }
+      .info-cards { flex-direction: column; align-items: center; }
+    }
+
+    .footer-divider {
+      height: 2px;
+      width: 100%;
+      background: white;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+      margin-top: 20px;
+    }
+
+    footer {
+      background-color: #000000;
+      color: #ffffff;
+      padding: 30px 15px;
+      text-align: center;
+      user-select: none;
+    }
+
+    .footer-links {
+      margin: 8px 0;
+    }
+
+    .footer-links a {
+      color: #ccc;
+      margin: 0 10px;
+      font-size: 0.9rem;
+      text-decoration: none;
+    }
+
+    .footer-links a:hover {
+      text-decoration: underline;
+    }
+
+    .social-icons {
+      margin: 10px 0;
+    }
+
+    .social-icons a {
+      color: white;
+      font-size: 1.5rem;
+      margin: 0 12px;
+      transition: 0.3s;
+    }
+
+    .social-icons a:hover {
+      color: #ffcc80;
+    }
+
+    footer p {
+      margin-top: 10px;
+      font-size: 0.9rem;
+      color: #cccccc;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Hero Header -->
+  <header class="hero-header">
+    <div class="overlay"></div>
+    <h1>ABOUT US</h1>
+    <nav class="navbar">
+      <div class="logo">
+        <span>Signoff</span>
+        <span>Coffee</span>
+      </div>
+      <div class="menu-toggle" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li class="dropdown">
+          <a href="about.html">About <i class="fa fa-caret-down"></i></a>
+          <ul class="dropdown-menu">
+            <li><a href="vision.html">Vision, Mission & Objective</a></li>
+            <li><a href="moments.html">Our Moments</a></li>
+          </ul>
+        </li>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="reward.html">Rewards</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Vision, Mission & Objective Section -->
+  <section class="info-section">
+    <h2>Our Vision, Mission & Objectives</h2>
+    <div class="info-cards">
+      <div class="info-card">
+        <h3>Vision</h3>
+        <ul>
+          <li>To be the most approachable mobile coffee brand that delivers joy in every cup through memorable "kopi tika off" moments.</li>
+        </ul>
+      </div>
+
+      <div class="info-card">
+        <h3>Mission</h3>
+        <ul>
+          <li>To serve fresh, affordable coffee with fast and friendly service through mobile setups like carboot stalls and pop-up booths.</li>
+          <li>To provide a cozy and welcoming coffee experience inspired by moments of rest and relaxation.</li>
+          <li>To combine barista skills and culinary knowledge to deliver satisfying drinks on the go.</li>
+        </ul>
+      </div>
+
+      <div class="info-card">
+        <h3>Objectives</h3>
+        <ul>
+          <li>To introduce “Kopi Tika Off” as a signature concept that highlights taking a break with coffee.</li>
+          <li>To join more local events such as university festivals, wedding catering, and community markets.</li>
+          <li>To maintain quality and consistency while expanding the drink menu.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <div class="footer-divider"></div>
+  <footer>
+    <div class="footer-links">
+      Terms & Conditions | Privacy Policy
+    </div>
+
+    <div class="social-icons">
+      <a href="https://wa.me/60166141438" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+      <a href="https://www.instagram.com/signoffcoffee_?igsh=c21lZnd2eDJ4ejhr" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.tiktok.com/@signoffcoffee?_t=ZS-8xZk1xynBie&_r=1" target="_blank" title="TikTok"><i class="fab fa-tiktok"></i></a>
+    </div>
+
+    <p>Created: 25 June 2025 | Last updated: <span id="lastUpdated"></span></p>
+    <p>&copy; 2025 Signoff Coffee. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const updated = new Date();
+    const months = ['January', 'February', 'March', 'April', 'May', 'June',
+                    'July', 'August', 'September', 'October', 'November', 'December'];
+    document.getElementById("lastUpdated").textContent = `${updated.getDate()} ${months[updated.getMonth()]} ${updated.getFullYear()}`;
+  </script>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById('navLinks').classList.toggle('show');
+    }
+  </script>
+</body>
+</html>
